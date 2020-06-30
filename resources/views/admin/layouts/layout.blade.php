@@ -40,10 +40,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="/adminlte/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{ Gravatar::get(auth()->user()->email) }}" class="img-circle elevation-2" alt="{{ auth()->user()->name }}">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
+                    <a href="{{ route('admin.users.show', auth()->user()) }}" class="d-block">{{ auth()->user()->name }}</a>
                 </div>
             </div>
 
@@ -81,6 +81,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Default to the left -->
         <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
     </footer>
+    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+    </form>
 </div>
 <!-- ./wrapper -->
 

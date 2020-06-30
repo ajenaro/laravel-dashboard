@@ -14,6 +14,12 @@ class UserSeeder extends Seeder
     {
         User::truncate();
 
+        User::create([
+                'name'           => 'Admin',
+                'email'          => 'admin@admin.com',
+                'password'       => '$2y$10$oPTZiwmD3Dgy5KH/OnlVv.kWqnFnbYze3F/YsZ5w55Wh2qNzVugOy', // password
+        ]);
+
         for($i = 1; $i < 60; $i++) {
             factory(User::class)->create([
                  'created_at' => now()->subDays($i),

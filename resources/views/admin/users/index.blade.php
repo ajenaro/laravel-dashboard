@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layouts.layout')
 
 @section('content-header')
     <div class="container-fluid">
@@ -8,7 +8,6 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Users</a></li>
                     <li class="breadcrumb-item active">Show Users</li>
                 </ol>
             </div><!-- /.col -->
@@ -58,6 +57,22 @@
     <script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script>
+        // añadimos la funcionlidad de ordenar por fecha en formato DD/MM/YYYY
+        // al objeto jQuery
+        jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+            "date-es-pre": function ( a ) {
+                let esDatea = a.split('/');
+                return (esDatea[2] + esDatea[1] + esDatea[0]) * 1;
+            },
+
+            "date-es-asc": function ( a, b ) {
+                return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+            },
+
+            "date-es-desc": function ( a, b ) {
+                return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+            }
+        } );
         $(function () {
             $('#users-table').DataTable({
                 "language": {
@@ -68,11 +83,17 @@
                 "searching": true,
                 "ordering": true,
                 "order": [[ 0, "desc" ]],
-                "columnDefs": [ {
-                    "targets": -1,
-                    "searchable": false,
-                    "orderable": false,
-                } ],
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "type": 'date-es',
+                    },
+                    {
+                        "targets": -1,
+                        "searchable": false,
+                        "orderable": false,
+                    }
+                ],
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,

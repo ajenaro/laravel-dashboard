@@ -30,7 +30,9 @@
     </div>
 </div>
 <!-- /.login-box -->
-
+<p class="mb-0">
+    <a href="{{ route('home') }}" class="text-center">Back to {{ config('app.name') }}</a>
+</p>
 <!-- jQuery -->
 <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

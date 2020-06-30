@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('admin.users.create') }}" class="nav-link {{ request()->is('admin/users/create') ? ' active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>New User</p>
                     </a>
@@ -30,6 +30,12 @@
             <a href="https://adminlte.io/docs/3.0" class="nav-link" target="_blank">
                 <i class="nav-icon fas fa-file"></i>
                 <p>Documentation</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link" onclick="document.getElementById('logoutform').submit();">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Logout</p>
             </a>
         </li>
     </ul>
