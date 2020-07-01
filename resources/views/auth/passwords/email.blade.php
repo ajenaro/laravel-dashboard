@@ -1,8 +1,8 @@
-@extends('auth.layout')
+@extends('auth.layouts.layout')
 
 @section('content')
     <div class="card-body login-card-body">
-        <p class="login-box-msg">¿Olvidaste tu contraseña? Desde aquí puedes crear una nueva.</p>
+        <p class="login-box-msg">{{ __('You forgot your password? Here you can easily retrieve a new password.') }}</p>
 
         @if (session('status'))
             <div class="alert alert-success" role="alert">
@@ -33,16 +33,13 @@
             <div class="row">
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary btn-block">
-                        Enviar enlace para cambiar clave
+                        {{ __('Send Password Reset Link') }}
                     </button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
-        <p class="mt-3 mb-1">
-            <a href="{{ route('login') }}">Entrar</a>
-        </p>
     </div>
 {{--<div class="container">--}}
 {{--    <div class="row justify-content-center">--}}

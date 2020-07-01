@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -36,11 +37,21 @@ class UsersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
 
+        $data = $request->validate(
+            [
+                'name' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:8'
+            ]
+        );
+
+        User::create($data);
+
+        return redirect()->route('admin.users.index')->with('flash', 'User added successfully');
     }
 
     /**
@@ -70,13 +81,14 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateUserRequest $request
+     * @param User $user
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        return $request;
+        $user->update($request->validated());
+
+        return redirect()->route('admin.users.edit', $user)->with('flash', 'User edit successfully');
     }
 
     /**

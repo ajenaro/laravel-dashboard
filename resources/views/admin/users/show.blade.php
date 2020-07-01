@@ -8,7 +8,7 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Users</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Users</a></li>
                     <li class="breadcrumb-item active">Show User</li>
                 </ol>
             </div><!-- /.col -->
@@ -46,7 +46,7 @@
         <div class="col-md-3">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">Ultimas Publicaciones</h3>
+                    <h3 class="card-title">Last Logins</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -70,7 +70,7 @@
         <div class="col-md-3">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">Permisos adicionales</h3>
+                    <h3 class="card-title">Permissions</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">

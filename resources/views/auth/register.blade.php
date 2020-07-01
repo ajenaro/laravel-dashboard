@@ -1,4 +1,4 @@
-@extends('auth.layout')
+@extends('auth.layouts.layout')
 
 @section('content')
     <div class="card-body register-card-body">
@@ -10,7 +10,6 @@
                 <input id="name" type="text" class="form-control
                         @error('name') is-invalid @enderror"
                         name="name" value="{{ old('name') }}"
-                        required
                         autocomplete="name"
                         autofocus
                         placeholder="Full name">
@@ -31,7 +30,6 @@
                         @error('email') is-invalid @enderror"
                         name="email"
                         value="{{ old('email') }}"
-                        required
                         autocomplete="email"
                         placeholder="Email">
 
@@ -50,7 +48,6 @@
                 <input id="password" type="password" class="form-control
                         @error('password') is-invalid @enderror"
                         name="password"
-                        required
                         autocomplete="new-password"
                        placeholder="Password">
 
@@ -69,7 +66,6 @@
                 <input id="password-confirm" type="password"
                        class="form-control"
                        name="password_confirmation"
-                       required
                        autocomplete="new-password"
                        placeholder="Retype password">
 

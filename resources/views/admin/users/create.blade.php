@@ -8,7 +8,7 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Users</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Users</a></li>
                     <li class="breadcrumb-item active">Add User</li>
                 </ol>
             </div><!-- /.col -->
@@ -25,13 +25,12 @@
             <div class="col-md-6">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">Datos Personales</h3>
+                        <h3 class="card-title">Personal Data</h3>
                     </div>
                     <div class="card-body">
 
-                        @include('admin.users._fields')
+                        @include('admin.users._fields', ['btnText' => 'Create User'])
 
-                        <button class="btn btn-primary btn-block">Crear Usuario</button>
                     </div>
                     <!-- /.card-body -->
                 </div>

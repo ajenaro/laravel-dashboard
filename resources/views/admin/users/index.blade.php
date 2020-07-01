@@ -20,6 +20,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">DataTable with default features</h3>
+            <a href="{{ route('admin.users.create') }}" class="btn btn-primary float-lg-right"><i class="fa fa-plus"></i> New User</a>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -57,8 +58,7 @@
     <script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script>
-        // añadimos la funcionlidad de ordenar por fecha en formato DD/MM/YYYY
-        // al objeto jQuery
+        // allow sorting by date in DD/MM/YYYY format
         jQuery.extend( jQuery.fn.dataTableExt.oSort, {
             "date-es-pre": function ( a ) {
                 let esDatea = a.split('/');
@@ -76,7 +76,8 @@
         $(function () {
             $('#users-table').DataTable({
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                    //"url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                    "url": "http://cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
                 },
                 "paging": true,
                 "lengthChange": false,

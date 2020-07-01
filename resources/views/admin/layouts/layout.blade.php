@@ -8,13 +8,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>AdminLTE 3 | Starter</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/adminlte/css/adminlte.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="/adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     @stack('styles')
@@ -58,7 +62,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
+
             @yield('content-header')
+
         </div>
         <!-- /.content-header -->
 
@@ -95,6 +101,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/adminlte/js/adminlte.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="/adminlte/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+    });
+</script>
+@if(session()->has('flash'))
+    <script>
+        Toast.fire({
+            icon: 'success',
+            title: "{{ session('flash') }}"
+        })
+    </script>
+@endif
+@if(session()->has('error'))
+    <script>
+        Toast.fire({
+            icon: 'error',
+            title: "{{ session('error') }}"
+        })
+    </script>
+@endif
 @stack('scripts')
 </body>
 </html>

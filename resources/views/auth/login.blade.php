@@ -1,4 +1,4 @@
-@extends('auth.layout')
+@extends('auth.layouts.layout')
 
 @section('content')
     <div class="card-body login-card-body">
@@ -11,10 +11,9 @@
                         @error('email') is-invalid @enderror"
                         name="email"
                         value="{{ old('email') }}"
-                        required
                         autocomplete="email"
                         autofocus
-                        placeholder="Email">
+                        placeholder="admin@admin.com">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-envelope"></span>
@@ -30,9 +29,8 @@
                 <input id="password" type="password" class="form-control
                         @error('password') is-invalid @enderror"
                         name="password"
-                        required
                         autocomplete="current-password"
-                        placeholder="Password">
+                        placeholder="password">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -49,20 +47,20 @@
                     <div class="icheck-primary">
                         <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                         <label for="remember">
-                            Remember Me
+                            {{ __('Remember Me') }}
                         </label>
                     </div>
                 </div>
                 <!-- /.col -->
                 <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
         <p class="mb-1">
-            <a href="{{ route('password.request') }}">I forgot my password</a>
+            <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
         </p>
         <p class="mb-0">
             <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
