@@ -81,12 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel Dashboard
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/">Laravel</a>
-                    <a href="https://adminlte.io/themes/v3/index.html">AdminLTE3</a>
+                    {{ config('app.name') }}
                 </div>
             </div>
         </div>
