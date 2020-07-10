@@ -25,7 +25,7 @@
                 <div class="card-body box-profile">
                     <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle"
-                             src="{{ Gravatar::get($user->email) }}"
+                             src="{{ $user->gravatar() }}"
                              alt="{{ $user->name }}">
                     </div>
 
@@ -46,7 +46,7 @@
         <div class="col-md-3">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">Last Logins</h3>
+                    <h3 class="card-title">Lastest Logins</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -58,7 +58,7 @@
         <div class="col-md-3">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">Roles</h3>
+                    <h3 class="card-title">Column 3</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -70,7 +70,7 @@
         <div class="col-md-3">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">Permissions</h3>
+                    <h3 class="card-title">Column 4</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
