@@ -14,13 +14,14 @@ class EmailVerificationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_email_verification_screen_can_be_rendered()
+    /** @test  */
+    public function email_verification_screen_can_be_rendered()
     {
         $user = factory(User::class)->create([
             'email_verified_at' => null,
         ]);
 
-        $response = $this->actingAs($user)->get('/verify-email');
+        $response = $this->actingAs($user)->get('/email/verify');
 
         $response->assertStatus(200);
     }
@@ -42,11 +43,13 @@ class EmailVerificationTest extends TestCase
         $response = $this->actingAs($user)->get($verificationUrl);
 
         Event::assertDispatched(Verified::class);
+
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
-        $response->assertRedirect(RouteServiceProvider::HOME.'?verified=1');
+        $response->assertRedirect(RouteServiceProvider::HOME);
     }
 
-    public function test_email_is_not_verified_with_invalid_hash()
+    /** @test  */
+    public function email_is_not_verified_with_invalid_hash()
     {
         $user = factory(User::class)->create([
             'email_verified_at' => null,

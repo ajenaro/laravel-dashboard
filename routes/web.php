@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -21,7 +21,7 @@ Route::group(
     [
         'prefix' => 'admin',
         'namespace' => 'Admin',
-        'middleware' => ['auth']
+        'middleware' => ['auth', 'verified']
     ],
 
     function () {
