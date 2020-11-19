@@ -30,7 +30,7 @@
                     </div>
                     <div class="card-body">
 
-                        @include('admin.users._fields', ['btnText' => 'Edit User'])
+                        @include('admin.users._fields', ['btnText' => 'Editar Usuario'])
 
                     </div>
                     <!-- /.card-body -->
