@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -15,7 +16,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('created_at', 'desc')->get();
+        $users = User::with('profile')
+                ->orderBy('name', 'asc')
+                ->paginate();
 
         return view('admin.users.index',
             compact('users')
@@ -38,20 +41,11 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
+        $request->createUser();
 
-        $data = $request->validate(
-            [
-                'name' => 'required',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:8'
-            ]
-        );
-
-        User::create($data);
-
-        return redirect()->route('admin.users.index')->with('flash', 'User added successfully');
+        return redirect()->route('admin.users.index')->with('flash', 'Usuario agregado correctamente');
     }
 
     /**
@@ -86,9 +80,9 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->validated());
+        $request->updateUser($user);
 
-        return redirect()->route('admin.users.edit', $user)->with('flash', 'User edit successfully');
+        return redirect()->route('admin.users.edit', $user)->with('flash', 'Usuario editado correctamente');
     }
 
     /**
@@ -101,6 +95,6 @@ class UsersController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('admin.users.index')->with('flash', 'Usuario eliminado correctamente');
+        return back()->with('flash', 'Usuario eliminado correctamente');
     }
 }

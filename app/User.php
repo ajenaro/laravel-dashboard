@@ -16,9 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -46,5 +44,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function gravatar()
     {
         return Gravatar::get($this->email);
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class)->withDefault();
     }
 }

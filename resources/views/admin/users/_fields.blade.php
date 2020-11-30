@@ -17,6 +17,30 @@
 </div>
 
 <div class="form-group">
+    <label for="job_title">Job Title</label>
+    <input type="text" name="job_title"
+           class="form-control"
+           value="{{ old('job_title', $user->profile->job_title) }}"
+           placeholder="Job Title">
+</div>
+
+<div class="form-group">
+    <label for="website">Website</label>
+    <input type="text" name="website"
+           class="form-control"
+           value="{{ old('website', $user->profile->website) }}"
+           placeholder="Website">
+</div>
+
+<div class="form-group">
+    <label for="phone_number">Phone Number</label>
+    <input type="text" name="phone_number"
+           class="form-control"
+           value="{{ old('phone_number', $user->profile->phone_number) }}"
+           placeholder="Phone Number">
+</div>
+
+<div class="form-group">
     <label for="password">Password</label>
     <input type="password" name="password"
             class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
@@ -26,8 +50,8 @@
 </div>
 
 <div class="form-group">
-    <label for="password_confirm">Password Confirm</label>
-    <input type="password" name="password_confirm" class="form-control" placeholder="Password Confirm">
+    <label for="password_confirmation">Password Confirm</label>
+    <input type="password" name="password_confirmation" class="form-control" placeholder="Password Confirm">
 </div>
 
 <button class="btn btn-primary btn-block">{{ $btnText }}</button>

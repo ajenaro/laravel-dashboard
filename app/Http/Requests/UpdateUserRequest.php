@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -33,9 +34,29 @@ class UpdateUserRequest extends FormRequest
         ];
 
         if ($this->filled('password')) {
-            $rules['password'] = 'required|min:6|confirmed';
+            $rules['password'] = 'required|min:8|confirmed';
         }
 
         return $rules;
+    }
+
+    public function updateUser(User $user)
+    {
+        $user->fill([
+            'name' => $this->name,
+            'email' => $this->email,
+        ]);
+
+        if ($this->password != null) {
+            $user->password = $this->password;
+        }
+
+        $user->save();
+
+        $user->profile->update([
+           'job_title' => $this->job_title,
+           'website' => $this->website,
+           'phone_number' => $this->phone_number,
+       ]);
     }
 }
