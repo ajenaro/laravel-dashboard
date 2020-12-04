@@ -3,6 +3,7 @@
     <td>{{ $user->name }}</td>
     <td>{{ $user->email }}</td>
     <td>{{ $user->profile->job_title }}</td>
+    <td>{{ $user->active }}</td>
     <td>
         <a href="{{ route('admin.users.show', $user) }}"
            class="btn btn-primary btn-xs">

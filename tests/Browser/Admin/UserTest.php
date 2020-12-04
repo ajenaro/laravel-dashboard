@@ -28,7 +28,7 @@ class UserTest extends DuskTestCase
                 ->type('name', 'Antonio')
                 ->type('email', 'antonio.jenaro@gmail.com')
                 ->type('password', 'password')
-                ->type('password_confirm', 'password')
+                ->type('password_confirmation', 'password')
                 ->press('Crear Usuario')
                 ;
 

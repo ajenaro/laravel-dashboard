@@ -48,6 +48,10 @@ class CreateUserRequest extends FormRequest
                  'website' => $this->website,
                  'phone_number' => $this->phone_number,
              ]);
+
+            if ($this->skills != null) {
+                $user->skills()->attach($this->skills);
+            }
         });
     }
 }

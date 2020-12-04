@@ -3,7 +3,7 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +21,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="/adminlte/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 <body class="hold-transition sidebar-mini">

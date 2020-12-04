@@ -25,12 +25,25 @@
             <div class="col-md-6">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">Crear Usuario</h3>
+                        <h3 class="card-title">Datos del Usuario</h3>
                     </div>
                     <div class="card-body">
 
                         @include('admin.users._fields', ['btnText' => 'Crear Usuario'])
 
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+
+            <div class="col-md-6">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Información Adicional</h3>
+                    </div>
+                    <div class="card-body">
+                        @include('admin.users._skills')
                     </div>
                     <!-- /.card-body -->
                 </div>

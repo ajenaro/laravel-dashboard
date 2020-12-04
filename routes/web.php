@@ -17,5 +17,7 @@ Route::group(
         Route::get('/', 'AdminController@index')->name('admin');
 
         Route::resource('users', 'UsersController', ['as' => 'admin']);
+
+        Route::resource('skills', 'SkillsController', ['as' => 'admin']);
     }
 );

@@ -58,5 +58,7 @@ class UpdateUserRequest extends FormRequest
            'website' => $this->website,
            'phone_number' => $this->phone_number,
        ]);
+
+        $user->skills()->syncWithoutDetaching($this->skills ?: []);
     }
 }

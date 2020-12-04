@@ -2,14 +2,18 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Kyslik\ColumnSortable\Sortable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, Sortable;
+
+    public $sortable = ['id', 'name', 'email', 'created_at', 'updated_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -50,4 +54,35 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(UserProfile::class)->withDefault();
     }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class, 'user_skill')
+            ->withTimestamps();
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        if (empty ($search)) {
+            return;
+        }
+
+        $query->where('name', 'like', "%{$search}%")
+            ->orWhere('email', 'like', "%{$search}%")
+            ->orWhereHas('team', function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%");
+            });
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->with(
+            [
+                'profile',
+                'skills',
+            ]
+        )
+        ->where('active', true);
+    }
+
 }

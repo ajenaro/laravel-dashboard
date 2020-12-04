@@ -24,16 +24,19 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @if ($users->isNotEmpty())
 
+            @include('admin.users._filters')
+
+            @if ($users->isNotEmpty())
                 <div class="table-responsive-lg">
                     <table class="table table-bordered table-striped">
-                        <thead class="thead-dark">
+                        <thead>
                         <tr>
-                            <th>Created At</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Job Title</th>
+                            <th>@sortablelink('created_at', 'Created At')</th>
+                            <th>@sortablelink('name', 'Name')</th>
+                            <th>@sortablelink('email', 'Email')</th>
+                            <th>@sortablelink('profile.job_title', 'Job Title')</th>
+                            <th>Active</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -44,26 +47,12 @@
                         </tbody>
                     </table>
 
-                    {{ $users->links() }}
-                    <p>Viendo página {{ $users->currentPage() }} de {{ $users->lastPage() }}</p>
+                    {{ $users->appends(\Request::except('page'))->render() }}
+                    <p>Viendo página {{ $users->currentPage() }} de {{ $users->lastPage() }} </p>
                 </div>
             @else
                 <p>No hay usuarios registrados.</p>
             @endif
-<!--            <table id="users-table" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th>Created At</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Job Title</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>-->
         </div>
         <!-- /.card-body -->
     </div>
@@ -104,9 +93,9 @@
                     "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
                     //"url": "http://cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
                 },
-                "paging": true,
+                "paging": false,
                 "lengthChange": false,
-                "searching": true,
+                "searching": false,
                 "ordering": true,
                 "order": [[ 0, "desc" ]],
                 "columnDefs": [
@@ -120,7 +109,7 @@
                         "orderable": false,
                     }
                 ],
-                "info": true,
+                "info": false,
                 "autoWidth": false,
                 "responsive": true,
             });
