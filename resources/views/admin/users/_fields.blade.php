@@ -17,19 +17,12 @@
 </div>
 
 <div class="form-group">
-    <label for="job_title">Job Title</label>
-    <input type="text" name="job_title"
-           class="form-control"
-           value="{{ old('job_title', $user->profile->job_title) }}"
-           placeholder="Job Title">
-</div>
-
-<div class="form-group">
     <label for="website">Website</label>
     <input type="text" name="website"
-           class="form-control"
+           class="form-control {{ $errors->has('website') ? 'is-invalid' : '' }}"
            value="{{ old('website', $user->profile->website) }}"
            placeholder="Website">
+    {!! $errors->first('website', '<div class="invalid-feedback">:message</div>') !!}
 </div>
 
 <div class="form-group">

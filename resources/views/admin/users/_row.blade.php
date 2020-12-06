@@ -1,9 +1,10 @@
 <tr>
     <td>{{ $user->created_at->format('d/m/Y') }}</td>
+    <td>{{ $user->team->name }}</td>
     <td>{{ $user->name }}</td>
     <td>{{ $user->email }}</td>
-    <td>{{ $user->profile->job_title }}</td>
-    <td>{{ $user->active }}</td>
+    <td>{{ $user->profile->profession->title }}</td>
+    <td>{{ $user->state }}</td>
     <td>
         <a href="{{ route('admin.users.show', $user) }}"
            class="btn btn-primary btn-xs">

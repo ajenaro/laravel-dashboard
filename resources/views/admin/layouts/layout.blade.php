@@ -49,7 +49,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <img src="{{ Gravatar::get(auth()->user()->email) }}" class="img-circle elevation-2" alt="{{ auth()->user()->name }}">
                 </div>
                 <div class="info">
-                    <a href="{{ route('admin.users.show', auth()->user()) }}" class="d-block">{{ auth()->user()->name }}</a>
+                    <a href="{{ route('admin.users.show', auth()->user()) }}" class="d-block">
+                        {{ auth()->user()->name }}
+                        <br>
+                        <small>Last login: {{ auth()->user()->lastLogin() }}</small>
+                    </a>
+
                 </div>
             </div>
 

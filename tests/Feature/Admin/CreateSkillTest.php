@@ -15,6 +15,8 @@ class CreateSkillTest extends TestCase
     /** @test */
     function new_skill_page_can_be_rendered()
     {
+        $this->withoutExceptionHandling();
+
         $user = factory(User::class)->create();
 
         $this->actingAs($user)

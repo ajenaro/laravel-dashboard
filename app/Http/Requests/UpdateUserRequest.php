@@ -30,7 +30,12 @@ class UpdateUserRequest extends FormRequest
             'email' => [
                 'required',
                 Rule::unique('users')->ignore($this->route('user')->id)
-            ]
+            ],
+            'website' => ['nullable', 'present', 'url'],
+            'profession_id' => [
+                'nullable', 'present',
+                Rule::exists('professions', 'id')
+            ],
         ];
 
         if ($this->filled('password')) {
@@ -43,6 +48,7 @@ class UpdateUserRequest extends FormRequest
     public function updateUser(User $user)
     {
         $user->fill([
+            'team_id' => $this->team_id,
             'name' => $this->name,
             'email' => $this->email,
         ]);
@@ -54,11 +60,12 @@ class UpdateUserRequest extends FormRequest
         $user->save();
 
         $user->profile->update([
-           'job_title' => $this->job_title,
+           'user_id' => $user->id,
+           'profession_id' => $this->profession_id,
            'website' => $this->website,
            'phone_number' => $this->phone_number,
        ]);
 
-        $user->skills()->syncWithoutDetaching($this->skills ?: []);
+        $user->skills()->sync($this->skills ?: []);
     }
 }

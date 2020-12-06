@@ -2,11 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Team;
+use App\Profession;
 use Faker\Generator as Faker;
 
-$factory->define(Team::class, function (Faker $faker) {
+$factory->define(Profession::class, function (Faker $faker) {
     return [
-        'name' => $faker->company
+        'title' => $faker->jobTitle
     ];
 });

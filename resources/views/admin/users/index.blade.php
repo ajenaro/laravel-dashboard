@@ -33,9 +33,10 @@
                         <thead>
                         <tr>
                             <th>@sortablelink('created_at', 'Created At')</th>
+                            <th>@sortablelink('team.name', 'Team')</th>
                             <th>@sortablelink('name', 'Name')</th>
                             <th>@sortablelink('email', 'Email')</th>
-                            <th>@sortablelink('profile.job_title', 'Job Title')</th>
+                            <th>Profession</th>
                             <th>Active</th>
                             <th>Actions</th>
                         </tr>

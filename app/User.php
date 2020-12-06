@@ -38,6 +38,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'state' => 'bool',
+        'options' => 'json'
     ];
 
     public function setPasswordAttribute($password)
@@ -59,6 +61,26 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Skill::class, 'user_skill')
             ->withTimestamps();
+    }
+
+    public function logins()
+    {
+        return $this->hasMany(Login::class);
+    }
+
+    public function lastLogin()
+    {
+        if($this->logins->count() > 0) {
+            return $this->logins()->orderBy('created_at', 'desc')->first()->created_at->format('d/m/yy');
+        }
+
+        return '';
+
+    }
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class)->withDefault();
     }
 
     public function scopeSearch($query, $search)
@@ -85,4 +107,8 @@ class User extends Authenticatable implements MustVerifyEmail
         ->where('active', true);
     }
 
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 }

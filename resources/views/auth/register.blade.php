@@ -48,8 +48,7 @@
                 <input id="password" type="password" class="form-control
                         @error('password') is-invalid @enderror"
                         name="password"
-                        autocomplete="new-password"
-                       placeholder="Password">
+                       placeholder="Contraseña">
 
                 <div class="input-group-append">
                     <div class="input-group-text">
@@ -63,11 +62,10 @@
                 @enderror
             </div>
             <div class="input-group mb-3">
-                <input id="password-confirm" type="password"
+                <input id="password_confirmation" type="password"
                        class="form-control"
                        name="password_confirmation"
-                       autocomplete="new-password"
-                       placeholder="Retype password">
+                       placeholder="Repite Contraseña">
 
                 <div class="input-group-append">
                     <div class="input-group-text">

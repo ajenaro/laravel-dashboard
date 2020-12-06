@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\User;
+use App\{Profession, Team, User, Skill};
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -15,11 +16,30 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('created_at', 'desc')->get();
 
-        return view('admin.users.index',
-            compact('users')
-        );
+        $users = User::query()
+            ->search(request('search'))
+            ->with(['profile', 'skills', 'team', 'profile.profession'])
+            ->sortable()
+            ->OrderByDesc('created_at')
+            ->paginate();
+
+
+        /*$users = User::query()
+            ->when(request('search'), function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            })
+            ->with(['profile', 'skills'])
+            ->sortable()
+            ->OrderByDesc('created_at')
+            ->paginate();*/
+
+        return view('admin.users.index',[
+            'users' => $users,
+            'skills' => Skill::orderBy('name')->get(),
+            'checkedSkills' => collect(request('skills')),
+        ]);
     }
 
     /**
@@ -30,7 +50,12 @@ class UsersController extends Controller
     {
         $user = new User();
 
-        return view('admin.users.create', compact('user'));
+        return view('admin.users.create', [
+            'user' => $user,
+            'teams' => Team::orderBy('name')->get(),
+            'skills' => Skill::orderBy('name')->get(),
+            'professions' => Profession::orderBy('title')->get(),
+        ]);
     }
 
     /**
@@ -38,20 +63,11 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
+        $request->createUser();
 
-        $data = $request->validate(
-            [
-                'name' => 'required',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:8'
-            ]
-        );
-
-        User::create($data);
-
-        return redirect()->route('admin.users.index')->with('flash', 'User added successfully');
+        return redirect()->route('admin.users.index')->with('flash', 'Usuario agregado correctamente');
     }
 
     /**
@@ -62,7 +78,7 @@ class UsersController extends Controller
     public function show(User $user)
     {
         return view('admin.users.show',
-            compact('user')
+                    compact('user')
         );
     }
 
@@ -73,9 +89,12 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit',
-                    compact('user')
-        );
+        return view('admin.users.edit',[
+            'teams' => Team::orderBy('name')->get(),
+            'user' => $user,
+            'skills' => Skill::orderBy('name')->get(),
+            'professions' => Profession::orderBy('title')->get(),
+        ]);
     }
 
     /**
@@ -86,9 +105,9 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->validated());
+        $request->updateUser($user);
 
-        return redirect()->route('admin.users.edit', $user)->with('flash', 'User edit successfully');
+        return redirect()->route('admin.users.edit', $user)->with('flash', 'Usuario editado correctamente');
     }
 
     /**
@@ -101,6 +120,6 @@ class UsersController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('admin.users.index')->with('flash', 'Usuario eliminado correctamente');
+        return back()->with('flash', 'Usuario eliminado correctamente');
     }
 }

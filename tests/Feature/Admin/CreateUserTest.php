@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Profession;
 use App\Skill;
+use App\Team;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -13,13 +15,13 @@ class CreateUserTest extends TestCase
     use RefreshDatabase;
 
     protected $defaultData = [
+        'team_id' => null,
         'name' => 'Antonio',
         'email' => 'antonio.jenaro@gmail.com',
         'password' => 'password',
         'password_confirmation' => 'password',
-        'job_title' => 'Programador de Laravel y Vue.js',
-        'website' => 'antoniojenaro.com',
-        'active' => true,
+        'website' => 'http://antoniojenaro.com',
+        'state' => true,
     ];
 
     /** @test */
@@ -39,13 +41,21 @@ class CreateUserTest extends TestCase
     {
         $userLogin = factory(User::class)->create();
 
+        $profession = factory(Profession::class)->create();
+
         $skillA = factory(Skill::class)->create();
         $skillB = factory(Skill::class)->create();
         $skillC = factory(Skill::class)->create();
 
+        $team = factory(Team::class)->create();
+
         $this->defaultData['skills'] = [
             $skillA->id, $skillB->id
         ];
+
+        $this->defaultData['team_id'] = $team->id;
+
+        $this->defaultData['profession_id'] = $profession->id;
 
         $this->actingAs($userLogin)
             ->post(route('admin.users.store'), $this->defaultData)
@@ -55,8 +65,8 @@ class CreateUserTest extends TestCase
         $user = User::where('email', 'antonio.jenaro@gmail.com')->first();
 
         $this->assertDatabaseHas('user_profiles', [
-            'job_title' => 'Programador de Laravel y Vue.js',
-            'website' => 'antoniojenaro.com',
+            'profession_id' => $profession->id,
+            'website' => 'http://antoniojenaro.com',
             'phone_number' => null,
             'user_id' => $user->id,
         ]);
@@ -77,22 +87,29 @@ class CreateUserTest extends TestCase
             'user_id' => $user->id,
             'skill_id' => $skillC->id,
         ]);
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'team_id' => $team->id,
+        ]);
     }
 
     /** @test */
-    function the_job_title_field_is_optional()
+    function the_profession_title_field_is_optional()
     {
+        $this->withoutExceptionHandling();
+
         $userLogin = factory(User::class)->create();
 
-        $this->defaultData['job_title'] = null;
+        $this->defaultData['profession_id'] = null;
 
         $this->actingAs($userLogin)
             ->post(route('admin.users.store'), $this->defaultData)
             ->assertRedirect('/admin/users');
 
         $this->assertDatabaseHas('user_profiles', [
-            'job_title' => null,
-            'website' => 'antoniojenaro.com',
+            'profession_id' => null,
+            'website' => 'http://antoniojenaro.com',
         ]);
     }
 
@@ -102,6 +119,7 @@ class CreateUserTest extends TestCase
         $userLogin = factory(User::class)->create();
 
         $this->defaultData['website'] = null;
+        $this->defaultData['profession_id'] = null;
 
         $this->actingAs($userLogin)
             ->post(route('admin.users.store'), $this->defaultData)
@@ -109,8 +127,22 @@ class CreateUserTest extends TestCase
 
         $this->assertDatabaseHas('user_profiles', [
             'website' => null,
-            'job_title' => 'Programador de Laravel y Vue.js',
         ]);
+    }
+
+    /** @test */
+    function the_website_field_must_be_a_valid_url()
+    {
+        $userLogin = factory(User::class)->create();
+
+        $this->defaultData['website'] = 'domain.com';
+        $this->defaultData['profession_id'] = null;
+
+        $this->actingAs($userLogin)
+            ->post(route('admin.users.store'), $this->defaultData)
+            ->assertSessionHasErrors(['website'])
+        ;
+
     }
 
     /** @test */
