@@ -47,4 +47,5 @@
     <input type="password" name="password_confirmation" class="form-control" placeholder="Password Confirm">
 </div>
 
-<button class="btn btn-primary btn-block">{{ $btnText }}</button>
+<button class="btn btn-primary">{{ $btnText }}</button>
+<a href="{{ url('/admin/users'.$_COOKIE['pageurl']) }}" class="btn btn-secondary">Volver</a>

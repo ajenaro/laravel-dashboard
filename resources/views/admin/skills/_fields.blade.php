@@ -7,4 +7,5 @@
     {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
 </div>
 
-<button class="btn btn-primary btn-block">{{ $btnText }}</button>
+<button class="btn btn-primary">{{ $btnText }}</button>
+<a href="{{ url('/admin/skills'.$_COOKIE['pageurl']) }}" class="btn btn-secondary">Volver</a>

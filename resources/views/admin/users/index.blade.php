@@ -67,6 +67,9 @@
 @endpush
 
 @push('scripts')
+    <script>
+        document.cookie="pageurl=" + encodeURIComponent(window.location['search']);
+    </script>
     <!-- DataTables -->
 <!--    <script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

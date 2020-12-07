@@ -30,7 +30,7 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Nombre</th>
+                            <th>@sortablelink('name', 'Name')</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -40,6 +40,9 @@
                         @endforeach
                         </tbody>
                     </table>
+
+                    {{ $skills->appends(\Request::except('page'))->render() }}
+                    <p>Viendo página {{ $skills->currentPage() }} de {{ $skills->lastPage() }} </p>
 
                 </div>
             @else
@@ -106,4 +109,10 @@
                 });
             });
         </script>
+@endpush
+
+@push('scripts')
+    <script>
+        document.cookie="pageurl=" + encodeURIComponent(window.location['search']);
+    </script>
 @endpush

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 class SkillsController extends Controller
 {
@@ -14,9 +16,9 @@ class SkillsController extends Controller
      */
     public function index()
     {
-        return view('admin.skills.index', [
-            'skills' => Skill::orderBy('name')->get(),
-        ]);
+        $skills = Skill::sortable('name')->paginate();
+
+        return view('admin.skills.index', compact('skills'));
     }
 
     /**
@@ -45,7 +47,7 @@ class SkillsController extends Controller
 
         Skill::create($data);
 
-        return redirect()->route('admin.skills.index')->with('flash', 'Habilidad creada correctamente');
+        return redirect()->route('admin.skills.index')->with('flash', 'Registro creado correctamente');
     }
 
     /**
@@ -73,12 +75,20 @@ class SkillsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Skill $skill
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Skill $skill)
     {
-        //
+        $data = $request->validate(
+            [
+                'name' => 'required|' . Rule::unique('skills')->ignore($skill->id),
+            ]
+        );
+
+        $skill->update($data);
+
+        return redirect()->route('admin.skills.edit', $skill)->with('flash', 'Registro actualizado correctamente');
     }
 
     /**

@@ -67,7 +67,7 @@ class UsersController extends Controller
     {
         $request->createUser();
 
-        return redirect()->route('admin.users.index')->with('flash', 'Usuario agregado correctamente');
+        return redirect('/admin/users'.$_COOKIE['pageurl'])->with('flash', 'Usuario agregado correctamente');
     }
 
     /**
