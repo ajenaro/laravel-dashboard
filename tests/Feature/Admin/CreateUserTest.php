@@ -27,8 +27,6 @@ class CreateUserTest extends TestCase
     /** @test */
     function new_users_page_can_be_rendered()
     {
-        $this->markTestIncomplete();
-
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
@@ -99,8 +97,6 @@ class CreateUserTest extends TestCase
     /** @test */
     function the_profession_title_field_is_optional()
     {
-        $this->markTestIncomplete();
-
         $userLogin = factory(User::class)->create();
 
         $this->defaultData['profession_id'] = null;

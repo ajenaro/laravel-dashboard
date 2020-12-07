@@ -48,4 +48,6 @@
 </div>
 
 <button class="btn btn-primary">{{ $btnText }}</button>
+@if(isset($_COOKIE['pageurl']))
 <a href="{{ url('/admin/users'.$_COOKIE['pageurl']) }}" class="btn btn-secondary">Volver</a>
+@endif

@@ -8,4 +8,7 @@
 </div>
 
 <button class="btn btn-primary">{{ $btnText }}</button>
-<a href="{{ url('/admin/skills'.$_COOKIE['pageurl']) }}" class="btn btn-secondary">Volver</a>
+@if(isset($_COOKIE['pageurl']))
+    <a href="{{ url('/admin/skills'.$_COOKIE['pageurl']) }}" class="btn btn-secondary">Volver</a>
+@endif
+
