@@ -52,7 +52,7 @@ class CreateSkillTest extends TestCase
             ->post(route('admin.skills.store'), [
                 'name' => null
             ])
-            ->assertSessionHasErrors(['name' => 'El campo nombre es obligatorio.']);
+            ->assertSessionHasErrors(['name']);
 
     }
 
@@ -69,7 +69,7 @@ class CreateSkillTest extends TestCase
             ->post(route('admin.skills.store'), [
                 'name' => 'PHP'
             ])
-            ->assertSessionHasErrors(['name' => 'El campo nombre ya ha sido registrado.']);
+            ->assertSessionHasErrors(['name']);
         ;
     }
 }

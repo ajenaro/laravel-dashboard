@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Validator;
 
 class SkillsController extends Controller
 {
@@ -39,11 +38,14 @@ class SkillsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate(
-            [
+        $messages = [
+            'name.required' => 'La habilidad debe ser obligatoria.',
+            'name.unique' => 'Esta habilida ya existe',
+        ];
+
+        $data = $request->validate([
                 'name' => 'required|unique:skills',
-            ]
-        );
+            ], $messages);
 
         Skill::create($data);
 
@@ -80,11 +82,13 @@ class SkillsController extends Controller
      */
     public function update(Request $request, Skill $skill)
     {
-        $data = $request->validate(
-            [
+        $messages = [
+            'name.required' => 'La habilidad debe ser obligatoria.',
+        ];
+
+        $data = $request->validate([
                 'name' => 'required|' . Rule::unique('skills')->ignore($skill->id),
-            ]
-        );
+            ], $messages);
 
         $skill->update($data);
 

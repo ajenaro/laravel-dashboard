@@ -1,0 +1,14 @@
+<div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" name="name"
+           class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+           value="{{ old('name', $team->name) }}"
+           placeholder="Name">
+    {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
+</div>
+
+<button class="btn btn-primary">{{ $btnText }}</button>
+@if(isset($_COOKIE['pageurl']))
+    <a href="{{ url('/admin/teams'.$_COOKIE['pageurl']) }}" class="btn btn-secondary">Volver</a>
+@endif
+

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Admin;
+namespace Tests\Feature\Admin\Users;
 
 use App\Profession;
 use App\Skill;
@@ -154,7 +154,9 @@ class CreateUserTest extends TestCase
 
         $this->actingAs($userLogin)
             ->post(route('admin.users.store'), $this->defaultData)
-            ->assertSessionHasErrors(['name' => 'El campo nombre es obligatorio.']);
+            //->assertSessionHasErrors(['name' => 'El campo nombre es obligatorio.']);
+            ->assertSessionHasErrors(['name'])
+        ;
 
     }
 
@@ -167,7 +169,8 @@ class CreateUserTest extends TestCase
 
         $this->actingAs($userLogin)
             ->post(route('admin.users.store'), $this->defaultData)
-            ->assertSessionHasErrors(['email' => 'El campo correo electrónico es obligatorio.']);
+            ->assertSessionHasErrors(['email'])
+        ;
     }
 
     /** @test */

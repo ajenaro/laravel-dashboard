@@ -47,10 +47,18 @@
         <div class="col-md-6 text-right">
             <div class="form-inline form-dates">
                 <label for="from" class="form-label-sm">Fecha</label>&nbsp;
+
                 <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
                     <input type="text" class="form-control form-control-sm datepicker" name="from" id="from" placeholder="Desde" value="{{ request('from') }}">
                 </div>
+
                 <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
                     <input type="text" class="form-control form-control-sm datepicker" name="to" id="to" placeholder="Hasta" value="{{ request('to') }}">
                 </div>
                 &nbsp;

@@ -37,3 +37,8 @@
         </div>
     @endforeach
 </div>
+
+<div class="form-group">
+    <label for="state">Estado</label>
+    <input type="checkbox" name="state" class="form-check-inline" id="state" {{ $user->state ? 'checked' : '' }}>
+</div>

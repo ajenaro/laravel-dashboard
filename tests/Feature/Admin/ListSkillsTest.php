@@ -13,10 +13,8 @@ class ListSkillsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function it_shows_the_users_list()
+    function it_shows_the_skills_list()
     {
-        $this->withoutExceptionHandling();
-
         $userLogin = factory(User::class)->create();
 
         factory(Skill::class)->create(['name' => 'HTML']);

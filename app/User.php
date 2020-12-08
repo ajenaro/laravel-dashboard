@@ -47,6 +47,11 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->attributes['password'] = bcrypt($password);
     }
 
+    public function setStateAttribute($value)
+    {
+        $this->attributes['state'] = $value ? 1 : 0;
+    }
+
     public function gravatar()
     {
         return Gravatar::get($this->email);

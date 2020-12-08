@@ -51,6 +51,7 @@ class UpdateUserRequest extends FormRequest
             'team_id' => $this->team_id,
             'name' => $this->name,
             'email' => $this->email,
+            'state' => $this->state
         ]);
 
         if ($this->password != null) {

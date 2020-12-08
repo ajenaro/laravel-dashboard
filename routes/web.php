@@ -19,5 +19,9 @@ Route::group(
         Route::resource('users', 'UsersController', ['as' => 'admin']);
 
         Route::resource('skills', 'SkillsController', ['as' => 'admin']);
+
+        Route::resource('professions', 'ProfessionsController', ['as' => 'admin']);
+
+        Route::resource('teams', 'TeamsController', ['as' => 'admin']);
     }
 );

@@ -45,7 +45,8 @@ class CreateUserRequest extends FormRequest
                  'team_id' => $this->team_id,
                  'name' => $this->name,
                  'email' => $this->email,
-                 'password' => $this->password
+                 'password' => $this->password,
+                 'state' => $this->state
              ]);
 
             $user->save();
@@ -60,5 +61,18 @@ class CreateUserRequest extends FormRequest
                 $user->skills()->attach($this->skills);
             }
         });
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'Name: Custom message in CreateUserRequest',
+            'email.required' => 'Email: Custom message in CreateUserRequest',
+        ];
     }
 }

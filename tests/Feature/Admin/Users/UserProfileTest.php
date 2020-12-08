@@ -7,7 +7,6 @@ use App\User;
 use App\UserProfile;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UserProfileTest extends TestCase
@@ -17,38 +16,25 @@ class UserProfileTest extends TestCase
     /** @test */
     function a_user_can_edit_its_profile()
     {
-        $this->markTestIncomplete();
-
         $user = factory(User::class)->create();
 
-        $newProfession = factory(Profession::class)->create();
-
-        $this->actingAs($user);
-
-        $response = $this->get('/editar-perfil/');
-
-        $response->assertStatus(200);
-
-        $response = $this->put('/editar-perfil/', [
-            'name' => 'Duilio',
-            'email' => 'duilio@styde.net',
-            'bio' => 'Programador de Laravel y Vue.js',
-            'twitter' => 'https://twitter.com/sileence',
-            'profession_id' => $newProfession->id,
-        ]);
-
-        $response->assertRedirect();
+        $this->actingAs($user)
+            ->put(route('admin.users.update', $user), [
+                'name' => 'Antonio',
+                'email' => 'antonio.jenaro@gmail.com',
+                'website' => null,
+                'profession_id' => null,
+            ]);
 
         $this->assertDatabaseHas('users', [
-            'name' => 'Duilio',
-            'email' => 'duilio@styde.net',
+            'name' => 'Antonio',
+            'email' => 'antonio.jenaro@gmail.com',
         ]);
 
-        $this->assertDatabaseHas('user_profiles', [
-            'bio' => 'Programador de Laravel y Vue.js',
-            'twitter' => 'https://twitter.com/sileence',
+       /*$this->assertDatabaseHas('user_profiles', [
+            'website' => 'https://twitter.com/sileence',
             'profession_id' => $newProfession->id,
-        ]);
+        ]);*/
     }
 
     /** @test */
@@ -87,8 +73,8 @@ class UserProfileTest extends TestCase
         $this->markTestSkipped();
 
         $user = factory(User::class)->create([
-                                                 'name' => 'Antonio',
-                                             ]);
+             'name' => 'Antonio',
+         ]);
 
         $this->assertInstanceOf(UserProfile::class, $user->profile);
         $this->assertFalse($user->profile->exists);

@@ -4,7 +4,15 @@
     <td>{{ $user->name }}</td>
     <td>{{ $user->email }}</td>
     <td>{{ $user->profile->profession->title }}</td>
-    <td>{{ $user->state }}</td>
+    <td>
+        <div class="icheck-primary d-inline">
+            <input type="checkbox"
+                   class="status_check"
+                   id="status_{{ $user->id }}" {{ $user->state ? 'checked' : '' }}
+                   disabled>
+            <label for="status_{{ $user->id }}"></label>
+        </div>
+    </td>
     <td>
         <a href="{{ route('admin.users.show', $user) }}"
            class="btn btn-primary btn-xs">
