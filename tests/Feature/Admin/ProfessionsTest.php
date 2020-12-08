@@ -30,7 +30,7 @@ class ProfessionsTest extends TestCase
     }
 
     /** @test */
-    function new_profession_page_can_be_rendered()
+    function authenticated_users_can_see_a_new_profession_form()
     {
         $user = factory(User::class)->create();
 

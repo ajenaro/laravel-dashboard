@@ -28,6 +28,12 @@ class ExampleTest extends TestCase
     }
 
     /** @test */
+    function authenticated_users_can_see_a_new_row_form()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /** @test */
     public function authenticated_users_can_create_a_new_row()
     {
         $this->markTestIncomplete();

@@ -40,6 +40,16 @@ class TeamsTest extends TestCase
     }
 
     /** @test */
+    function authenticated_users_can_see_a_new_team_form()
+    {
+        $this->actingAs(factory(User::class)->create())
+            ->get(route('admin.teams.create'))
+            ->assertStatus(200)
+            ->assertSee('Nuevo Equipo')
+        ;
+    }
+
+    /** @test */
     public function authenticated_users_can_create_a_new_team()
     {
         $team = factory(Team::class)->make();
