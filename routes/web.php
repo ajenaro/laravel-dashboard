@@ -23,5 +23,7 @@ Route::group(
         Route::resource('professions', 'ProfessionsController', ['as' => 'admin']);
 
         Route::resource('teams', 'TeamsController', ['as' => 'admin']);
+
+        Route::resource('posts', 'PostsController', ['as' => 'admin']);
     }
 );

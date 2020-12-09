@@ -18,7 +18,9 @@ class DatabaseSeeder extends Seeder
               'user_skill',
               'skills',
               'teams',
-              'professions'
+              'professions',
+              'posts',
+              'categories'
           ]);
 
         $this->call([
@@ -26,6 +28,8 @@ class DatabaseSeeder extends Seeder
             TeamSeeder::class,
             ProfessionSeeder::class,
             UserSeeder::class,
+            CategorySeeder::class,
+            PostSeeder::class,
         ]);
     }
 
