@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Kyslik\ColumnSortable\Sortable;
 
 class Post extends Model
@@ -18,10 +19,15 @@ class Post extends Model
         'published_at' => 'datetime',
     ];
 
-    public function setPublishedAtAttribute( $published_at )
+    public function setPublishedAtAttribute( $value )
     {
-        $this->attributes['published_at'] = $published_at
-            ? Carbon::createFromFormat('d/m/Y', $published_at)->format('Y-m-d')
+        $this->attributes['published_at'] = $value
+            ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d')
             : null;
+    }
+
+    public function getExcerptResumeAttribute($value): string
+    {
+        return Str::limit($this->attributes['excerpt'], 50, '...');
     }
 }

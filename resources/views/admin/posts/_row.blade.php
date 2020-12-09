@@ -1,7 +1,7 @@
 <tr>
     <td>{{ optional($post->published_at)->format('d/m/Y') }}</td>
     <td>{{ $post->title }}</td>
-    <td>{{ Illuminate\Support\Str::limit($post->excerpt, 50, '...') }}</td>
+    <td>{{ $post->excerpt_resume }}</td>
     <td>
         <a href=""
            class="btn btn-primary btn-xs"
@@ -17,7 +17,7 @@
             @method('DELETE')
             @csrf
             <button class="btn btn-danger btn-xs"
-                    onclick="return confirm('Are you sure?')">
+                    onclick="return confirm('Estás seguro/a?')">
                 <i class="fas fa-trash">
                 </i>
             </button>
