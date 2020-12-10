@@ -46,7 +46,6 @@ class CreateUserRequest extends FormRequest
                  'name' => $this->name,
                  'email' => $this->email,
                  'password' => $this->password,
-                 'state' => $this->state
              ]);
 
             $user->save();
@@ -60,6 +59,8 @@ class CreateUserRequest extends FormRequest
             if ($this->skills != null) {
                 $user->skills()->attach($this->skills);
             }
+
+            $user->markEmailAsVerified();
         });
     }
 

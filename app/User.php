@@ -79,7 +79,7 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->logins()->orderBy('created_at', 'desc')->first()->created_at->format('d/m/yy');
         }
 
-        return '';
+        return 'No login yet';
 
     }
 

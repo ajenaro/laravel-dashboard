@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -30,6 +32,7 @@ class PostsController extends Controller
 
         return view('admin.posts.create', [
             'post' => $post,
+            'showUrl' => false,
             'categories' => Category::all()
         ]);
     }
@@ -39,7 +42,7 @@ class PostsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
         $data = $request->all();
         $data['user_id'] = auth()->id();
@@ -69,6 +72,7 @@ class PostsController extends Controller
     {
         return view('admin.posts.edit', [
             'post' => $post,
+            'showUrl' => true,
             'categories' => Category::all()
         ]);
     }
@@ -76,23 +80,28 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Post $post
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
+
+        $post->update($data);
+
+        return redirect()->route('admin.posts.edit', $post)->with('flash', 'Registro actualizado correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Post $post
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return back()->with('flash', 'Registro eliminado correctamente');
     }
 }

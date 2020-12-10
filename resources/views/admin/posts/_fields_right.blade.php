@@ -32,14 +32,6 @@
 </div>
 
 <div class="form-group">
-    <label for="excerpt">Excerpt</label>
-    <textarea name="excerpt"
-              class="form-control {{ $errors->has('excerpt') ? 'is-invalid' : '' }}"
-              placeholder="Post excerpt">{{ old('excerpt', $post->excerpt) }}</textarea>
-    {!! $errors->first('excerpt', '<div class="invalid-feedback">:message</div>') !!}
-</div>
-
-<div class="form-group">
     <div class="dropzone"></div>
 </div>
 

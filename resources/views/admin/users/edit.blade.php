@@ -30,7 +30,7 @@
                     </div>
                     <div class="card-body">
 
-                        @include('admin.users._fields', ['btnText' => 'Editar Usuario'])
+                        @include('admin.users._fields_left', ['btnText' => 'Editar Usuario'])
 
                     </div>
                     <!-- /.card-body -->
@@ -44,7 +44,7 @@
                         <h3 class="card-title">Información Adicional</h3>
                     </div>
                     <div class="card-body">
-                        @include('admin.users._skills')
+                        @include('admin.users._fields_right')
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -55,3 +55,8 @@
     </form>
 
 @endsection
+
+@push('styles')
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+@endpush

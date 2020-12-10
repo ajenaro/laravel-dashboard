@@ -29,7 +29,7 @@
                     </div>
                     <div class="card-body">
 
-                        @include('admin.users._fields', ['btnText' => 'Crear Usuario'])
+                        @include('admin.users._fields_left', ['btnText' => 'Crear Usuario'])
 
                     </div>
                     <!-- /.card-body -->
@@ -43,7 +43,7 @@
                         <h3 class="card-title">Información Adicional</h3>
                     </div>
                     <div class="card-body">
-                        @include('admin.users._skills')
+                        @include('admin.users._fields_right')
                     </div>
                     <!-- /.card-body -->
                 </div>

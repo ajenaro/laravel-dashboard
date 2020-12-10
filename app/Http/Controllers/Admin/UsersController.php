@@ -52,6 +52,7 @@ class UsersController extends Controller
 
         return view('admin.users.create', [
             'user' => $user,
+            'showStatus' => false,
             'teams' => Team::orderBy('name')->get(),
             'skills' => Skill::orderBy('name')->get(),
             'professions' => Profession::orderBy('title')->get(),
@@ -90,8 +91,9 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         return view('admin.users.edit',[
-            'teams' => Team::orderBy('name')->get(),
             'user' => $user,
+            'showStatus' => true,
+            'teams' => Team::orderBy('name')->get(),
             'skills' => Skill::orderBy('name')->get(),
             'professions' => Profession::orderBy('title')->get(),
         ]);

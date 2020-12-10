@@ -8,6 +8,25 @@
     {!! $errors->first('title', '<div class="invalid-feedback">:message</div>') !!}
 </div>
 
+@if($showUrl)
+<div class="form-group">
+    <label for="url">Url</label>
+    <input type="text"
+           name="url"
+           value="{{ $post->url }}"
+           class="form-control"
+           disabled>
+</div>
+@endif
+
+<div class="form-group">
+    <label for="excerpt">Excerpt</label>
+    <textarea name="excerpt"
+              class="form-control {{ $errors->has('excerpt') ? 'is-invalid' : '' }}"
+              placeholder="Post excerpt">{{ old('excerpt', $post->excerpt) }}</textarea>
+    {!! $errors->first('excerpt', '<div class="invalid-feedback">:message</div>') !!}
+</div>
+
 <div class="form-group">
     <label for="body">Body</label>
     <textarea name="body"

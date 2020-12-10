@@ -26,19 +26,29 @@
     <label>Habilidades</label>
     <br>
     @foreach($skills as $skill)
-        <div class="form-check form-check-inline">
-            <input name="skills[{{ $skill->id }}]"
-                   class="form-check-input"
-                   type="checkbox"
-                   id="skill_{{ $skill->id }}"
-                   value="{{ $skill->id }}"
+        <div class="icheck-primary d-inline" style="margin-right: 5px">
+            <input type="checkbox"
+                    name="skills[{{ $skill->id }}]"
+                    class="form-check-input"
+                    id="skill_{{ $skill->id }}"
+                    value="{{ $skill->id }}"
                 {{ ($errors->any() ? old("skills.{$skill->id}") : $user->skills->contains($skill)) ? 'checked' : '' }}>
             <label class="form-check-label" for="skill_{{ $skill->id }}">{{ $skill->name }}</label>
         </div>
     @endforeach
 </div>
 
+@if($showStatus)
 <div class="form-group">
-    <label for="state">Estado</label>
-    <input type="checkbox" name="state" class="form-check-inline" id="state" {{ $user->state ? 'checked' : '' }}>
+    <label>Estado</label>
+    <br>
+    <div class="icheck-primary d-inline">
+        <input type="checkbox"
+               name="state"
+               id="state"
+               class="form-check-input"
+               {{ $user->state ? 'checked' : '' }}>
+        <label class="form-check-label" for="state">Activo</label>
+    </div>
 </div>
+@endif
