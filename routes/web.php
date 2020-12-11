@@ -25,5 +25,7 @@ Route::group(
         Route::resource('teams', 'TeamsController', ['as' => 'admin']);
 
         Route::resource('posts', 'PostsController', ['as' => 'admin']);
+
+        Route::resource('tags', 'TagsController', ['as' => 'admin']);
     }
 );

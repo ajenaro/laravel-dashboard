@@ -16,7 +16,7 @@
 </div>
 
 <div class="form-group">
-    <label for="category_id">Categories</label>
+    <label for="category_id">Categoría</label>
     <select name="category_id" class="form-control select2bs4 {{ $errors->has('category_id') ? 'is-invalid' : '' }}">
         <option value="">Select</option>
         @foreach($categories as $category)
@@ -28,7 +28,11 @@
 
 <div class="form-group">
     <label for="tags">Tags</label>
-
+    <select name="tags[]" class="select2bs4" multiple="multiple" data-placeholder="Selecciona una o varias etiquetas" style="width: 100%;">
+        @foreach($tags as $tag)
+            <option value="{{ $tag->id }}" {{ collect(old('tags', $post->tags->pluck('id')))->contains($tag->id) ? 'selected' : '' }}>{{ $tag->name }}</option>
+        @endforeach
+    </select>
 </div>
 
 <div class="form-group">

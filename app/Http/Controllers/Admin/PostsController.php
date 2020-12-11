@@ -73,7 +73,8 @@ class PostsController extends Controller
         return view('admin.posts.edit', [
             'post' => $post,
             'showUrl' => true,
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'tags'      => Tag::all(),
         ]);
     }
 
