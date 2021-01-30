@@ -30,6 +30,7 @@
 <div class="form-group">
     <label for="body">Body</label>
     <textarea name="body"
+              id="body"
               class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}"
               placeholder="Contenido de la publicación">{{ old('body', $post->body) }}</textarea>
     {!! $errors->first('body', '<div class="invalid-feedback">:message</div>') !!}

@@ -30,4 +30,59 @@ class Post extends Model
     {
         return Str::limit($this->attributes['excerpt'], 50, '...');
     }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class);
+    }
+
+    public static function create(array $attributes = [])
+    {
+        $attributes['user_id'] = auth()->id();
+
+        $post = static::query()->create($attributes);
+
+        $post->generateUrl();
+
+        return $post;
+    }
+
+    public function generateUrl()
+    {
+        $url = Str::slug($this->title, '-');
+
+        if ($this::where('url', $url)->exists()) {
+            $url = "{$url}-{$this->id}";
+        }
+
+        $this->url = $url;
+
+        $this->save();
+    }
+
+    public function synTags($tags)
+    {
+        $tagIds = collect($tags)->map(
+            function ($tag) {
+                return Tag::find($tag) ? $tag : Tag::create(['name' => $tag])->id;
+            }
+        );
+
+        return $this->tags()->sync($tagIds);
+    }
 }

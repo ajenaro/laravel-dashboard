@@ -72,6 +72,8 @@
 @push('styles')
     <!-- date picker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <!-- CkEditor -->
+    <script src="/adminlte/plugins/ckeditor/ckeditor.js"></script>
     <!-- Select2 -->
     <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
@@ -92,6 +94,12 @@
             language: 'es',
             autoclose: true
         })
+
+        CKEDITOR.replace( 'body', {
+            language: 'es',
+            height: 500,
+            codeSnippet_theme: 'monokai_sublime',
+        });
 
         //Initialize Select2 Elements
         $('.select2bs4').select2({

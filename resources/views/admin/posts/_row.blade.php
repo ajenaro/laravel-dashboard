@@ -3,9 +3,8 @@
     <td>{{ $post->title }}</td>
     <td>{{ $post->excerpt_resume }}</td>
     <td>
-        <a href=""
-           class="btn btn-primary btn-xs"
-           target="_blank">
+        <a href="#"
+           class="btn btn-primary btn-xs">
             <i class="far fa-eye"></i>
         </a>
         <a href="{{ route('admin.posts.edit', $post) }}"

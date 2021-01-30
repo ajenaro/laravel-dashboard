@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
               'teams',
               'professions',
               'posts',
-              'categories'
+              'categories',
+              'tags'
           ]);
 
         $this->call([
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             PostSeeder::class,
+            TagSeeder::class
         ]);
     }
 

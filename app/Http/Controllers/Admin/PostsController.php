@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -33,7 +34,8 @@ class PostsController extends Controller
         return view('admin.posts.create', [
             'post' => $post,
             'showUrl' => false,
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'tags' => Tag::all()
         ]);
     }
 
@@ -44,12 +46,13 @@ class PostsController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        $data = $request->all();
-        $data['user_id'] = auth()->id();
+        $post = Post::create($request->except('tags'));
 
-        Post::create($data);
+        $post->synTags($request['tags']);
 
-        return redirect()->route('admin.posts.index')->with('flash', 'Registro creado correctamente');
+        $post->save();
+
+        return redirect()->route('admin.posts.edit', $post)->with('flash', 'Registro creado correctamente');
     }
 
     /**
@@ -73,7 +76,8 @@ class PostsController extends Controller
         return view('admin.posts.edit', [
             'post' => $post,
             'showUrl' => true,
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'tags' => Tag::all()
         ]);
     }
 
@@ -85,10 +89,9 @@ class PostsController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $data = $request->all();
-        $data['user_id'] = auth()->id();
+        $post->update($request->except('tags'));
 
-        $post->update($data);
+        $post->synTags($request['tags']);
 
         return redirect()->route('admin.posts.edit', $post)->with('flash', 'Registro actualizado correctamente');
     }

@@ -25,5 +25,9 @@ Route::group(
         Route::resource('teams', 'TeamsController', ['as' => 'admin']);
 
         Route::resource('posts', 'PostsController', ['as' => 'admin']);
+
+        Route::post('posts/{post}/photos', 'PhotoController@store')->name('admin.photos.store');
+        Route::PUT('photos/{photo}/update', 'PhotoController@update')->name('admin.photos.update');
+        Route::delete('photos/{photo}', 'PhotoController@destroy')->name('admin.photos.destroy');
     }
 );

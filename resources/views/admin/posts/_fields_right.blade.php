@@ -27,8 +27,12 @@
 </div>
 
 <div class="form-group">
-    <label for="tags">Tags</label>
-
+    <label for="tags">Etiquetas</label>
+    <select name="tags[]" class="select2bs4" multiple="multiple" data-placeholder="Selecciona una o varias etiquetas" style="width: 100%;">
+        @foreach($tags as $tag)
+            <option value="{{ $tag->id }}" {{ collect(old('tags', $post->tags->pluck('id')))->contains($tag->id) ? 'selected' : '' }}>{{ $tag->name }}</option>
+        @endforeach
+    </select>
 </div>
 
 <div class="form-group">

@@ -54,3 +54,8 @@
     </form>
 
 @endsection
+
+@push('styles')
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+@endpush
