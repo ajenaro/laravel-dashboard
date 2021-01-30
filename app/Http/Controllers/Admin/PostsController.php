@@ -48,7 +48,8 @@ class PostsController extends Controller
     {
         $post = Post::create($request->except('tags'));
 
-        $post->synTags($request['tags']);
+        $post->tags()->attach($request['tags']);
+        //$post->sync($request['tags']);
 
         $post->save();
 
@@ -91,7 +92,7 @@ class PostsController extends Controller
     {
         $post->update($request->except('tags'));
 
-        $post->synTags($request['tags']);
+        $post->tags()->sync($request['tags']);
 
         return redirect()->route('admin.posts.edit', $post)->with('flash', 'Registro actualizado correctamente');
     }

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class PhotoController extends Controller
 {
-    public function store($id)
+    public function store(Post $post)
     {
         $this->validate(
             request(),
@@ -17,8 +17,6 @@ class PhotoController extends Controller
                 'photo' => 'required|image|max:2048'
             ]
         );
-
-        $post = Post::find($id);
 
         $post->photos()->create(['url' => request()->file('photo')->store('posts', 'public')]);
     }

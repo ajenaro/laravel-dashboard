@@ -19,6 +19,22 @@ class Post extends Model
         'published_at' => 'datetime',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(
+            function ($post) {
+                $post->tags()->detach();
+                $post->photos->each->delete();
+            }
+        );
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'url';
+    }
     public function setPublishedAtAttribute( $value )
     {
         $this->attributes['published_at'] = $value
@@ -73,16 +89,5 @@ class Post extends Model
         $this->url = $url;
 
         $this->save();
-    }
-
-    public function synTags($tags)
-    {
-        $tagIds = collect($tags)->map(
-            function ($tag) {
-                return Tag::find($tag) ? $tag : Tag::create(['name' => $tag])->id;
-            }
-        );
-
-        return $this->tags()->sync($tagIds);
     }
 }

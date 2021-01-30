@@ -31,7 +31,9 @@
                                     <form method="POST" action="{{ route('admin.photos.destroy', $photo) }}">
                                         @method('DELETE')
                                         @csrf
-                                        <button class="btn btn-danger btn-xs" style="position: absolute; margin: 5px;">
+                                        <button class="btn btn-danger btn-xs"
+                                                onclick="return confirm('¿Estás seguro/a?')"
+                                                style="position: absolute; margin: 5px;">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                         <img class="img-fluid" src="{{ url('/storage/' . $photo->url) }}">
@@ -136,7 +138,7 @@
         })
 
         let myDropzone = new Dropzone('.dropzone', {
-            url: '/admin/posts/{{ $post->id }}/photos',
+            url: '/admin/posts/{{ $post->url }}/photos',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },

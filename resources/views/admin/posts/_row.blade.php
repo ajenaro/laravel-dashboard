@@ -16,7 +16,7 @@
             @method('DELETE')
             @csrf
             <button class="btn btn-danger btn-xs"
-                    onclick="return confirm('Estás seguro/a?')">
+                    onclick="return confirm('¿Estás seguro/a?')">
                 <i class="fas fa-trash">
                 </i>
             </button>
