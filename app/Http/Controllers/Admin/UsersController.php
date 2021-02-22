@@ -14,8 +14,10 @@ class UsersController extends Controller
      * Display a listing of the resource.
      *
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        //return $request->input('skills');
 
         $users = User::query()
             ->search(request('search'))
@@ -23,17 +25,6 @@ class UsersController extends Controller
             ->sortable()
             ->OrderByDesc('created_at')
             ->paginate();
-
-
-        /*$users = User::query()
-            ->when(request('search'), function ($query, $search) {
-                $query->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%");
-            })
-            ->with(['profile', 'skills'])
-            ->sortable()
-            ->OrderByDesc('created_at')
-            ->paginate();*/
 
         return view('admin.users.index',[
             'users' => $users,

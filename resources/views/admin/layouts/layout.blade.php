@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -110,6 +110,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="/adminlte/js/adminlte.min.js"></script>
 <!-- SweetAlert2 -->
 <script src="/adminlte/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Custom js for this template -->
+<script src="{{ asset('js/admin/app.js') }}"></script>
 <script>
     const Toast = Swal.mixin({
         toast: true,
