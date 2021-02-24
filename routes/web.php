@@ -7,7 +7,7 @@ Auth::routes(['verify' => true]);
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/news', function () {
-   return view('news');
+   return view('front.news');
 });
 
 Route::get('changeLang', 'ChangeLanguageController@change')->name('changeLang');
